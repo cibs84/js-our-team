@@ -4,7 +4,8 @@
 // BONUS:
 // Utilizzare gli input presenti nella pagina per permettere all'utente di aggiungere nuovi membri del team: cliccando sul pulsante "add" viene creato un nuovo oggetto, il quale viene inserito nell'array iniziale e viene stampata una nuova card con tutte le informazioni inserite dall'utente.
 
-// Creo l'array di oggetti
+
+// Creo l'array di oggetti cioè la lista dei membri del team
 const teamMembers = [
     {
         name: 'Wayne Barnett',
@@ -39,59 +40,78 @@ const teamMembers = [
 ];
 console.log('teamMembers dopo la sua creazione: ', teamMembers);
 
+
 // Seleziono l'elemento html .team-container in cui creerò le card dei membri
 const teamContainer = document.querySelector('.team-container');
 
-// Stampo dinamicamente una card per ogni membro del team
-// - Scorro gli oggetti dell'array con un ciclo for
-// - - Per ogni oggetto:
-for (let i = 0; i < teamMembers.length; i++) {
-    const thisMember = teamMembers[i];
 
-    // Creo elemento .team-card nell'elemento .team-container
-    teamContainer.innerHTML += `<div class="team-card">
-                                    <div class="card-image">
-                                        <img src="img/${thisMember.image}"alt="${thisMember.name}"/>
-                                    </div>
-                                    <div class="card-text">
-                                        <h3>${thisMember.name}</h3>
-                                        <p>${thisMember.role}</p>
-                                    </div>
-                                </div>`;
-}
+// Invoco la funzione drawAllObjectsArray() per stampare nelle card html la lista dei membri del team 
+drawAllObjectsArray(teamMembers);
 
-// Stampo la card di un nuovo membro del team dopo aver compilato ed inviato i dati tramite l'apposito form
-// - Seleziono gli elementi del form
-const formName = document.getElementById('name');
-const formRole = document.getElementById('role');
-const formImage = document.getElementById('image');
 
-// Al click del bottone di invio del form stampo la card del nuovo membro
-// - Seleziono il bottone di invio e ci associo una funzione anonima al click
-const addMemberButton = document.getElementById('addMemberButton');
+// Stampo la card di un nuovo membro del team dopo aver raccolto i dati dall'apposito form
+    // Seleziono gli elementi del form
+    const formName = document.getElementById('name');
+    const formRole = document.getElementById('role');
+    const formImage = document.getElementById('image');
 
-addMemberButton.addEventListener('click', addNewMember); 
+    // Al click del bottone 'Add' del form stampo la card del nuovo membro
+        // Seleziono il bottone 'Add' e invoco la funzione addNewMember() quando viene cliccato
+        const addMemberButton = document.getElementById('addMemberButton');
+        addMemberButton.addEventListener('click', addNewMember); 
 
-function addNewMember() {
-    // Creo un nuovo oggetto con i dati del form
-    const newMember = {
-        name: formName.value,
-        role: formRole.value,
-        image: formImage.value
+    // Con i dati raccolti dal form, genero un nuovo oggetto nella lista dei membri del team.
+    // Il nuovo oggetto verrà stampato invocando la funzione drawSingleObject()
+    function addNewMember() {
+        // Creo un nuovo oggetto con i dati del form
+        const newMember = {
+            name: formName.value,
+            role: formRole.value,
+            image: formImage.value
+        }
+        // Pusho il nuovo oggetto nell'array 'teamMembers'
+        teamMembers.push(newMember);
+
+        // Stampo il nuovo oggetto tramite la funzione drawSingleObject()
+        drawSingleObject(newMember);
     }
-    // Pusho il nuovo oggetto nell'array teamMembers
-    teamMembers.push(newMember);
 
-    // - Creo una card per il nuovo membro del team e la stampo utilizzando i valori del form html
-    teamContainer.innerHTML += `<div class="team-card">
-                                    <div class="card-image">
-                                        <img src="img/${newMember.image}"alt="${newMember.name}"/>
-                                    </div>
-                                    <div class="card-text">
-                                        <h3>${newMember.name}</h3>
-                                        <p>${newMember.role}</p>
-                                    </div>
-                                </div>`;
-    console.log('teamMembers dopo il click: ', teamMembers);
+
+
+// ----------------------------------------------------------------------------------------
+//                                      FUNCTIONS
+// ----------------------------------------------------------------------------------------
+
+
+// Scorre tutti gli oggetti dell'array che gli passo e per ognuno invoca una funzione che li andrà a stampare in html
+function drawAllObjectsArray(AllObjectsArray) {
+
+    // - Ciclo For - Per ogni oggetto:
+    for (let i = 0; i < AllObjectsArray.length; i++) {
+    const thisObject = AllObjectsArray[i];
+    
+    // - Invoco la funzione drawSingleObject() che stampa l'oggetto che gli passo, nell'elemento .team-container
+    drawSingleObject(thisObject);
+    }
 }
+
+
+// Stampa in un elemento html l'oggetto che gli viene passato
+function drawSingleObject(singleObject) {
+
+    // Crea l'elemento .team-card nell'elemento .team-container
+    teamContainer.innerHTML += `
+    <div class="team-card">
+        <div class="card-image">
+            <img src="img/${singleObject.image}"alt="${singleObject.name}"/>
+        </div>
+        <div class="card-text">
+            <h3>${singleObject.name}</h3>
+            <p>${singleObject.role}</p>
+        </div>
+    </div>
+    `;
+}
+
+// ------------------------------- FUNCTIONS END --------------------------------------------------------------
 
