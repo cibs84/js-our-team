@@ -45,7 +45,7 @@ console.log('teamMembers dopo la sua creazione: ', teamMembers);
 const teamContainer = document.querySelector('.team-container');
 
 
-// Invoco la funzione drawAllObjectsArray() per stampare nelle card html la lista dei membri del team 
+// Invoco la funzione drawAllObjectsArray() per stampare la lista dei membri del team nelle card html  
 drawAllObjectsArray(teamMembers);
 
 
@@ -60,21 +60,22 @@ drawAllObjectsArray(teamMembers);
         const addMemberButton = document.getElementById('addMemberButton');
         addMemberButton.addEventListener('click', addNewMember); 
 
-    // Con i dati raccolti dal form, genero un nuovo oggetto nella lista dei membri del team.
-    // Il nuovo oggetto verrà stampato invocando la funzione drawSingleObject()
-    function addNewMember() {
-        // Creo un nuovo oggetto con i dati del form
-        const newMember = {
-            name: formName.value,
-            role: formRole.value,
-            image: formImage.value
-        }
-        // Pusho il nuovo oggetto nell'array 'teamMembers'
-        teamMembers.push(newMember);
+        // Con i dati raccolti dal form, genero un nuovo oggetto nella lista dei membri del team.
+        // Il nuovo oggetto verrà stampato invocando la funzione drawSingleObject()
+        function addNewMember() {
+            // Creo un nuovo oggetto con i dati del form
+            const newMember = {
+                name: formName.value,
+                role: formRole.value,
+                image: formImage.value
+            }
 
-        // Stampo il nuovo oggetto tramite la funzione drawSingleObject()
-        drawSingleObject(newMember);
-    }
+            // Pusho il nuovo oggetto nell'array 'teamMembers'
+            teamMembers.push(newMember);
+
+            // Stampo il nuovo oggetto tramite la funzione drawSingleObject()
+            drawSingleObject(newMember);
+        }
 
 
 // ----------------------------------------------------------------------------------------
