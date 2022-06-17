@@ -5,7 +5,7 @@
 // Utilizzare gli input presenti nella pagina per permettere all'utente di aggiungere nuovi membri del team: cliccando sul pulsante "add" viene creato un nuovo oggetto, il quale viene inserito nell'array iniziale e viene stampata una nuova card con tutte le informazioni inserite dall'utente.
 
 
-// Creo l'array di oggetti cioè la lista dei membri del team
+// Creo la lista dei membri del team in un array di oggetti
 const teamMembers = [
     {
         name: 'Wayne Barnett',
@@ -75,7 +75,6 @@ drawAllObjectsArray(teamMembers);
         // Stampo il nuovo oggetto tramite la funzione drawSingleObject()
         drawSingleObject(newMember);
     }
-
 
 
 // ----------------------------------------------------------------------------------------
