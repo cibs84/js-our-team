@@ -50,7 +50,7 @@ drawAllObjectsArray(teamMembers);
 
 
 // Stampo la card di un nuovo membro del team dopo aver raccolto i dati dall'apposito form
-    // Seleziono gli elementi del form
+    // Prendo dal form i valori inseriti dall'utente
     const formName = document.getElementById('name');
     const formRole = document.getElementById('role');
     const formImage = document.getElementById('image');
@@ -75,6 +75,11 @@ drawAllObjectsArray(teamMembers);
 
             // Stampo il nuovo oggetto tramite la funzione drawSingleObject()
             drawSingleObject(newMember);
+
+            // Pulisco il form
+            formName.value = '';
+            formRole.value = '';
+            formImage.value = '';
         }
 
 
@@ -83,7 +88,7 @@ drawAllObjectsArray(teamMembers);
 // ----------------------------------------------------------------------------------------
 
 
-// Scorre tutti gli oggetti dell'array che gli passo e per ognuno invoca una funzione che li andrà a stampare in html
+// Scorre tutti gli oggetti dell'array che gli passo e per ognuno invoca la funzione drawSingleObject() che li andrà a stampare in html
 function drawAllObjectsArray(AllObjectsArray) {
 
     // - Ciclo For - Per ogni oggetto:
@@ -99,8 +104,8 @@ function drawAllObjectsArray(AllObjectsArray) {
 // Stampa in un elemento html l'oggetto che gli viene passato
 function drawSingleObject(singleObject) {
 
-    // Crea l'elemento .team-card nell'elemento .team-container
-    teamContainer.innerHTML += `
+    // Creo il template dell'elemento .team-card
+    templateTeamCard = `
     <div class="team-card">
         <div class="card-image">
             <img src="img/${singleObject.image}"alt="${singleObject.name}"/>
@@ -111,6 +116,10 @@ function drawSingleObject(singleObject) {
         </div>
     </div>
     `;
+    
+    // Crea l'elemento .team-card nell'elemento .team-container 
+        // Concateno il template della .team-card nell'innerHTML del .team-container
+        teamContainer.innerHTML += templateTeamCard
 }
 
 // ------------------------------- FUNCTIONS END --------------------------------------------------------------
